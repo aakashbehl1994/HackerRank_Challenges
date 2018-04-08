@@ -1,15 +1,12 @@
 
-# coding: utf-8
-
-# In[ ]:
+#problem link : https://www.hackerrank.com/challenges/predicting-office-space-price/problem
 
 
 import fileinput
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
-#######Extract the Training and Testing data
-
+# Inputing data in training set and testing set
 i=-1
 for line in fileinput.input():
     if i==-1:
@@ -30,15 +27,14 @@ for line in fileinput.input():
         if len(testing_vector)>1:
             testing_feature.append(testing_vector)
 
-#######Transform the features
+# Building Model
 poly = PolynomialFeatures(degree=2)
 processed_training_feature = poly.fit_transform(training_feature)
 
-#######Build the Model
 model = LinearRegression().fit(processed_training_feature,training_class)
 testing_processed = poly.fit_transform(testing_feature)
 
-#######Predict the Output
+# Printing predictions
 prediction=model.predict(testing_processed)
 for each_prediction in prediction:
     print each_prediction
